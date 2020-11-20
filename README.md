@@ -1,2 +1,2 @@
 # Webchess
-An ambitious project of a multiplayer webchess
+My multiplayer webchess project. Soon this readme will be properly written...
