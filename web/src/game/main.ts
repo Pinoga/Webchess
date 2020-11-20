@@ -8,7 +8,7 @@ boardController.initializeBoard()
 
 const pawn = new Pawn(WHITE)
 const bpawn = new Pawn(BLACK)
-boardController.movePiece(pawn, board[0][7])
-boardController.movePiece(pawn, board[0][3])
-boardController.movePiece(bpawn, board[4][4])
+boardController.movePiece(pawn, boardController.cellAt(0, 7)!)
+boardController.movePiece(pawn, boardController.cellAt(3, 7)!)
+boardController.movePiece(bpawn, boardController.cellAt(4, 4)!)
 export default boardController

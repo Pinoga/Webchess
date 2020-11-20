@@ -1,7 +1,7 @@
 import Cell, { Cell_v } from './Cell'
 import Piece from './Piece'
 
-type Board = Array<Array<Cell>>
+type Board = Array<Cell>
 
 export default class BoardController {
     private _board: Board
@@ -14,16 +14,13 @@ export default class BoardController {
     }
 
     public initializeBoard(): void {
-        for (let x = 0; x < 8; x++) {
-            this._board.push([])
-            for (let y = 0; y < 8; y++) {
-                this._board[x].push(new Cell(x, y))
-            }
+        for (let x = 0; x < 64; x++) {
+            this._board.push(new Cell(x))
         }
     }
 
     public cellAt(x: number, y: number): Cell_v {
-        return this.board[x][y]
+        return this.board[8*y + x]
     }
 
     public isCellOutOfBounds(x: number, y: number): boolean {

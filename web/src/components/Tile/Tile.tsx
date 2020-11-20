@@ -1,30 +1,30 @@
 import React from 'react'
+import { BoardDisplayTile } from '../../Pages/Main/App'
 
-interface TileProps {
+interface TileProps extends BoardDisplayTile {
     id: number;
-    selected: boolean;
-    x: number;
-    y: number;
-    onClick: () => void;
+    selected: string;
+    hover: string;
+    highlighted: string;
+    color: string;
+    onClick: () => any;
+    onMouseEnter: () => any;
+    onMouseLeave: () => any;
 }
 
-const Tile: React.FC<TileProps> = ({id, x, y, onClick, selected, children}) => {
+const Tile: React.FC<TileProps> = (p) => {
 
-    const getCssTileColor = (x: number, y: number) : string => {
-        if ((x % 2 === 0 && y % 2 === 0) || (x % 2 === 1 && y % 2 === 1))
-            return 'white'
-        return 'black'
-    }
-
-    
 
     return (
         <div
-            className={`tile ${getCssTileColor(x, y)}${selected ? ' selected' : ''}`}
-            key={id}
-            onClick={onClick}
+            className={`tile ${p.color} ${p.selected} ${p.hover} ${p.highlighted}`}
+            key={p.id}
+            onClick={p.onClick}
+            onMouseEnter={p.onMouseEnter}
+            onMouseLeave={p.onMouseLeave}
         >
-            {children}
+            {p.id}
+            {p.children}
         </div>        
     )
 }
