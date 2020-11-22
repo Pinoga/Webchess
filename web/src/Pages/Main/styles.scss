@@ -69,7 +69,7 @@ $BLACK_COLOR: black;
     &.black {
         background-color: $BLACK_COLOR;
     }
-    &.hover:hover {
+    &.hoverable:hover {
         background-color: blue;
         opacity: 0.3;
     }
