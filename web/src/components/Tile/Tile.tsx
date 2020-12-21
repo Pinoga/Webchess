@@ -15,7 +15,7 @@ const Tile: React.FC<TileProps> = (p) => {
             key={p.id}
             onClick={p.onClick}
         >
-            {p.id}
+            {/* {p.id} */}
             {p.children}
         </div>        
     )

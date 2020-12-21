@@ -1,12 +1,10 @@
+import { Team } from './constants/Team';
+import Position from './constants/Position';
 import Cell from './Cell'
+import Observer from './Observer'
 import Pattern from './Pattern'
 
 type Cell_v = Cell | null
-
-export interface Position {
-    x: number,
-    y: number
-}
 
 export default abstract class Piece {
     //The current cell the piece is occupying.
@@ -20,12 +18,15 @@ export default abstract class Piece {
     //Array of the piece's past moves
     protected _moveHistory: Array<Cell>
 
-    protected _pseudoValidMoves: Array<Cell_v>
+    //Necessarily a superset of the possible moves the Piece can make
+    protected _pseudoValidMoves: Position[]
 
-    get currentCell(): Cell_v {
+    protected _pseudoValidThreats: Position[]
+
+    public get currentCell(): Cell_v {
         return this._currentCell
     }
-    set currentCell(newCell: Cell_v) {
+    public set currentCell(newCell: Cell_v) {
         this._currentCell = newCell
     }
 
@@ -36,15 +37,34 @@ export default abstract class Piece {
         this._team = team
     }
 
+    public get pvMoves(): Position[] {
+        return this._pseudoValidMoves
+    }
+
+    public set pvMoves(moves: Position[]) {
+        this._pseudoValidMoves = moves
+    }
+
+    
+    public get pvThreats() : Position[] {
+        return this._pseudoValidThreats
+    }
+
+    
+    public set pvThreats(threats : Position[]) {
+        this._pseudoValidThreats = threats;
+    }
+    
     public hasMoved() {
         return this._moveHistory.length !== 0
     }
 
-    constructor(team: number) {
+    constructor(team: Team) {
         this._currentCell = null
         this._team = team
         this._moveHistory = []
         this._pseudoValidMoves = []
+        this._pseudoValidThreats = []
     }
 
     public abstract pieceName(): string

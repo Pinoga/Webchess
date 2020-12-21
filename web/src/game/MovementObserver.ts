@@ -1,4 +1,4 @@
-import {Event} from '../game/constants/Events'
+import {Event} from '../game/constants/Event'
 
 export default class MovementObserver {
 

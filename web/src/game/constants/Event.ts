@@ -1,4 +1,6 @@
 export enum Event {
+    EVENT_GAME_START,
+    EVENT_PAWN_FIRST_MOVE,
     EVENT_PAWN_DOUBLE_MOVE,
 }
 

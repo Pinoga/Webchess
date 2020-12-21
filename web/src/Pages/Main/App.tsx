@@ -45,17 +45,25 @@ function App() {
         return [x, y]
     }
 
-    const tileClickHandler = (id: number) => {
+    const tileClickHandler = (clickedId: number) => {
         if (selected !== null) {
             console.log(selected)
-            let positions = [...getPositionByID(selected), ...getPositionByID(id)]
+            let positions = [...getPositionByID(selected), ...getPositionByID(clickedId)]
             bc.makeMove( positions[0], positions[1], positions[2], positions[3] )
             setSelected(null)
+            setHighlighted({})
         }
         else {
-            setSelected(id)
+            let newHighlighted = {} as any 
+            setSelected(clickedId)
+            bc.avaiableMoves(clickedId).forEach((id: number) => {
+                newHighlighted[id] = true
+            })
+            setHighlighted(newHighlighted)
         }
     }
+
+
 
     const getTileCSSClass = (id: number): string => {
         let CSSClass = ''
@@ -78,11 +86,12 @@ function App() {
                         ...tile,
                         style: getTileCSSClass(tile.id),
                         onClick: () => tileClickHandler(tile.id),
-                    }   
+                    }
+                    let piece = board[tile.id].piece
                     return (
                         <Tile {...tileProps} key={tile.id}>
                             {
-                            board[tile.id].piece ? (<Piece piece={board[tile.id].piece!.pieceName()}/>) : null
+                            board[tile.id].piece ? (<Piece piece={`${piece!.team}${piece!.pieceName()}`}/>) : null
                             }
                         </Tile>
                     )
